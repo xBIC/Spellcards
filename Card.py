@@ -2,6 +2,8 @@ from PIL import Image
 
 class Card:
 
+    renderedCard = None
+
     template = None
 
     """Name of the spell"""
@@ -40,21 +42,18 @@ class Card:
     """What materials are needed to cast this"""
     materials = None
 
-    """Is this spell verbal?"""
-    isVerbal = False
-
-    """Does this spell require the use of hand gestures?"""
-    isSomatic = False
-
-    """Does this spell require touch to cast?"""
-    isTouch = False
-
-    """Does this spell require focus to maintain?"""
-    isFocus = False
+    """How is this spell cast (ie. Verbal, Somatic, Touch, Focus)"""
+    spellType = None
 
 
-    def __init__(self, template):
-        self.template = Image.open(template)
+    def __init__(self):
+        pass
+
+    def setTemplate(self, template):
+        self.template = template
+
+    def getTemplate(self):
+        return self.template
 
     def setTitle(self, title):
         self.title = title
@@ -62,7 +61,7 @@ class Card:
     def getTitle(self):
         return self.title
 
-    def setClass(self, spellClass):
+    def setSpellClass(self, spellClass):
         self.spellClass = spellClass
 
     def getSpellClass(self):
@@ -128,29 +127,39 @@ class Card:
     def getMaterials(self):
         return self.materials
 
-    def setIsVerbal(self, isVerbal):
-        self.isVerbal = isVerbal
+    def setSpellType(self, spellType):
+        self.spellType = spellType
 
-    def getIsVerbal(self):
-        return self.isVerbal
+    def getSpellType(self):
+        return self.spellType
 
-    def setIsSomatic(self, isSomatic):
-        self.isSomatic = isSomatic
+    def setRenderedCard(self, renderedCard):
+        self.renderedCard = renderedCard
 
-    def getIsSomatic(self):
-        return self.isSomatic
-
-    def setIsTouch(self, isTouch):
-        self.isTouch = isTouch
-
-    def getIsTouch(self):
-        return self.isTouch
-
-    def setIsFocus(self, isFocus):
-        self.isFocus = isFocus
-
-    def getIsFocus(self):
-        return self.isFocus
+    def getRenderedCard(self):
+        return self.renderedCard
 
     def renderCard(self):
         """Render the card here"""
+
+    def showRenderedCard(self):
+        print("template:", self.getTemplate())
+        print("title:", self.getTitle())
+        print("spellClass:", self.getSpellClass())
+        print("level:", self.getLevel())
+        print("target:", self.getTarget())
+        print("effectType:", self.getEffectType())
+        print("actionCost:", self.getActionCost())
+        print("spellDuration:", self.getSpellDuration())
+        print("spellRange:", self.getSpellRange())
+        print("description:", self.getDescription())
+        print("area:", self.getArea())
+        print("page", self.getPage())
+        print("materials:")
+        print(self.getMaterials())
+        print("spellType:")
+        print(self.getSpellType())
+        #self.renderedCard.show()
+
+    def saveCard(self):
+        """Save the card to filesystem"""
